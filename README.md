@@ -22,6 +22,13 @@ git status
 
 This repository is used to document and manage DevOps internship projects using Git and GitHub.
 
+Basic Git workflow:
+
+git status
+git add
+git commit
+git push
+
 ## License
 
 This project is licensed under the MIT License.
