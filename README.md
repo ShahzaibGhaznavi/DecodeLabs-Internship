@@ -6,13 +6,17 @@ This repository contains my DevOps projects completed during the DecodeLabs Inte
 
 ## Installation
 
-Clone the repository:
+1. Clone the repository:
 
 git clone <repository-url>
 
-Navigate to the project directory:
+2. Navigate to the project directory:
 
 cd DecodeLabs-Internship
+
+3. Check the Git repository status:
+
+git status
 
 ## Usage
 
