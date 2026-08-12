@@ -34,14 +34,19 @@ jobs:
         with:
           name: decodelabs-project-3
           path: build/
+      - name: Download artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/download-artifact@v4
+        with:
+          name: decodelabs-project-3
+          path: deploy/
       - name: Deploy to EC2
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: appleboy/ssh-action@v1.2.2
+        uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            echo "Connected to EC2 successfully."
-            mkdir -p ~/decodelabs-project-3
-            echo "Deployment reached EC2 successfully."
+          source: "deploy/index.html,deploy/README.md"
+          target: "~/decodelabs-project-3"
+          strip_components: 1
