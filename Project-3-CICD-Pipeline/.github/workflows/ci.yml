@@ -1,0 +1,41 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify application files
+        run: |
+          test -f index.html
+          test -f README.md
+          echo "Application files verified successfully."
+
+      - name: Run basic test
+        run: |
+          grep -q "DecodeLabs Project 3" index.html
+          echo "Test passed successfully."
+
+      - name: Create artifact
+        run: |
+          mkdir -p build
+          cp index.html build/
+          cp README.md build/
+          echo "Build artifact created."
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: decodelabs-project-3
+          path: build/
